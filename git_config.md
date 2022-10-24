@@ -82,14 +82,22 @@
 
     `git push`
 
+
 ​	6. 上传速度慢的解决方案（挂vpn)
 
-		git config --global http.proxy http://127.0.0.1:7890
-		git config --global https.proxy http://127.0.0.1:7890
+```
+git config --global http.proxy http://127.0.0.1:7890
+git config --global https.proxy http://127.0.0.1:7890
+```
 
-​	
+​	![](img/image-20221024133108731.png)
 
 
 
-​		
+ 7. 上传出错时
 
+    ![image-20221024134043035](img/image-20221024134043035.png)		
+
+​		`git pull`
+
+​		重新上传
