@@ -60,6 +60,36 @@
 
 
 
+# 删除特定文件
 
-# 第二各部分
+1. 将github远程仓库中克隆中克隆我们需要操作的远程仓库
+
+   `git clone <仓库地址>`
+
+ 2. 进入到本地仓库
+
+    `cd gitrepo`
+
+ 3. 删除特定文件/文件夹
+
+    `git rm -r dir`
+
+ 4. 添加commit
+
+    `git commit -m "delete"`
+
+ 5. 将本地的内容推送到远程仓库
+
+    `git push`
+
+​	6. 上传速度慢的解决方案（挂vpn)
+
+		git config --global http.proxy http://127.0.0.1:7890
+		git config --global https.proxy http://127.0.0.1:7890
+
+​	
+
+
+
+​		
 
