@@ -10,7 +10,7 @@
 
    `git init`
 
-   ![git](D:\blog\git_config.assets\git.png)
+   ![git](git_config.assets/git.png)
 
 3. 收集目录下文件暂存
 
@@ -92,11 +92,11 @@
   git config --global https.proxy http://127.0.0.1:7890
   ```
 
-  ![image-20221024133108731](D:\blog\git_config.assets\image-20221024133108731.png)
+  ![image-20221024133108731](git_config.assets/image-20221024133108731.png)
 
  7. 上传出错时
 
-  ![image-20221024134043035](D:\blog\git_config.assets\image-20221024134043035.png)
+  ![image-20221024134043035](git_config.assets/image-20221024134043035.png)
 
   `git pull`
 
