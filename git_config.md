@@ -66,38 +66,36 @@
 
    `git clone <仓库地址>`
 
- 2. 进入到本地仓库
+2. 进入到本地仓库
 
     `cd gitrepo`
 
- 3. 删除特定文件/文件夹
+3. 删除特定文件/文件夹
 
     `git rm -r dir`
 
- 4. 添加commit
+4. 添加commit
 
     `git commit -m "delete"`
 
- 5. 将本地的内容推送到远程仓库
+5. 将本地的内容推送到远程仓库
 
     `git push`
 
 
-​	6. 上传速度慢的解决方案（挂vpn)
+6. 上传速度慢的解决方案（挂vpn)
 
-```
-git config --global http.proxy http://127.0.0.1:7890
-git config --global https.proxy http://127.0.0.1:7890
-```
+	```
+	git config --global http.proxy http://127.0.0.1:7890
+	git config --global https.proxy http://127.0.0.1:7890
+	```
 
-​	![](img/image-20221024133108731.png)
-
-
+	![](img/image-20221024133108731.png)
 
  7. 上传出错时
 
-    ![image-20221024134043035](img/image-20221024134043035.png)		
+	![image-20221024134043035](img/image-20221024134043035.png)		
 
-​		`git pull`
-
-​		重新上传
+	`git pull`
+	
+	重新上传
