@@ -101,17 +101,16 @@
     *   Max ops: 15
     *   Rating: 3
     */
-   int isAsciiDigit(int x) {
-     int sign = 0x1<<31;
-     int upperBound = ~(sign|0x39);
-     int lowerBound = ~0x30;
-     upperBound = sign&(upperBound+x)>>31;
-     lowerBound = sign&(lowerBound+1+x)>>31;
-     return !(upperBound|lowerBound);
+   int isAsciiDigit(int x){
+     int min = x + (~0x30 + 1);
+     int max = 0x39 + (~x+1);
+     min = !(min>>31);
+     max = !(max>>31);
+     return min&max;
    }
    ```
 
-   使用两个数，一个数是加上比0x39大的数后符号由正变负，另一个数是加上比0x30小的值时是负数。这两个数是代码中初始化的 `upperBound` 和 `lowerBound`，然后加法之后获取其符号位判断即可
+   该数满足1.减去最小值为非负数 2.最大值减去该数为非负数   满足即可
 
 7. 三目运算符
 
