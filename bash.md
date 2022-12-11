@@ -191,7 +191,35 @@
 
 11. 待定
 
+# 实践
 
+## set
 
+```c
+#!/usr/bin/env bash
+set -u			//如果不设置-u会造成未定义的变量输出空行，跳过输出，不会报错，设置-u后为使用未定义的变量会保存
+echo $a			//与set -o nounset相同
+echo "bar"
+```
 
+```c
+#!/usr/bin/env bash
+set -x   //等价于 set -o xtrace
+echo bar
+```
+
+表示执行脚本时会先将命令打印出来，首行以`+`表示
+
+```c
+#!/usr/bin/env bash
+set -e
+```
+
+不加set -e时如果某行出错bash依旧会执行，该功能使脚本只要发生错误，就终止执行
+
+```ba
+while IFS= read -r line; do
+	echo "$line"
+done < ../scripts/all_routes.txt
+```
 

@@ -31,7 +31,7 @@
 # 网络编程
 
    1. 字节转换、IP地址和点分十进制转换
-   
+
       ```c++
       #include<arpa/inet.h>
       uint32_t htonl(uint32_t hostlong);
@@ -46,13 +46,13 @@
       																		#返回：若成功则指向点分十进制字符串的指针，若出错则为NULL
        
       ```
-   
+
       "n"代表网络，"p"代表表示，"h"代表主机
-   
+
    2. 套接字接口
-   
+
       - 一个套接字就是通信的一个端点，套接字就是一个有相应描述符的打开文件，套接字地址存放在sockaddr_in的16个字节结构中，sin_family成员AF_INET，sin_port成员是一个16位的端口号，sin_addr成员就是一个32位的IP地址。IP地址和端口号总是以网络字节顺序（大端法）存放的
-      
+
       ```C++
       /* IP socket address structure */
       struct sockaddr_in{
@@ -68,28 +68,28 @@
           char sa_data[14]; /*Address data */
       }
       ```
-   
+
       - socket函数
-      
+
         ```c++
         #include<sys/types.h>
         #include<sys/socket.h>
         int socket(int domain,int type,int protocol);
         #返回：若成功，则返回非负描述符，出错为-1
         ```
-      
+
       - connect函数
-      
+
         客户端通过调用connect函数建立和服务器的连接，connect试图和套接字地址为addr的服务器建立一个因特网
-      
+
         ```c++
         #include<sys/socket.h>
         int connect(int clientfd,const struct sockaddr* addr,socklen_t addrlen);
         //返回:若成功则为0，出错则返回-1.
         ```
-      
+
       - bind函数、listen函数和accept函数，服务器用它们来和客户端建立连接
-      
+
         ```c++
         #include<sys/socket.h>
         int bind(int sockfd,const struct sockaddr* addr,socketlen_t addrlen);
@@ -99,28 +99,223 @@
         int accept(int listenfd,struct sockaddr* addr,int* addelen);
         //返回：若成功则为非负连接描述符，若出错则为-1
         ```
-   
+
    3. 主机和服务转换
-   
+
       - getaddrinfo()函数
-      
+
         getaddrinfo函数将主机名、主机地址、服务明和端口号的字符串转化成套接字地址结构
-      
+
         ![image-20221025161000986](./CSapp.assets/image-20221025161000986.png)
-      
+
       - getnamenameinfo()函数
-      
+
         getnameinfo函数与getaddrinfo函数是相反的，将一个套接字地址结构转换成相应的主机和服务名字符串
-      
+
         ![image-20221025161411114](./CSapp.assets/image-20221025161411114.png)
-   
-   4. 待定四
+
+   4. sockets
+
+      socket是逻辑层面上的一个端点，即连接中的一个端点，从应用程序角度，它是一个文件描述符
+
+      Socket 地址结构
+
+      ![image-20221112114014443](./CSapp.assets/image-20221112114014443.png)
+
+      ![image-20221112114108826](./CSapp.assets/image-20221112114108826.png)
+
+      `sockaddr_in` 结构体是 `sockaddr` 的子类
+
+      CS 架构流程图：
+
+      ![image-20221112114339294](./CSapp.assets/image-20221112114339294.png)
+
+      - `getaddreinfo()` 函数
+
+      ```c
+      #include <sys/types.h>
+      #include <sys/socket.h>
+      #include <netdb.h>
+      
+      int getaddrinfo(const char *node, const char *service, const struct addrinfo *hints,
+                  struct addrinfo **res);
+      
+      void freeaddrinfo(struct addrinfo *res);
+      
+      const char *gai_strerror(int errcode);
+      ```
+
+      其中 result 返回的是一个链表，比如一个域名可能对应多个 IP 地址。并且会自己 free
+
+      ![image-20221112114511962](./CSapp.assets/image-20221112114511962.png)
+
+      - `socket()` 函数：客户端和服务器端用来创建一个 socket 文件修饰符
+
+        ```
+        int socket(int domain, int type, int protocol);
+        
+        // 通常使用
+        int fd = socket(AF_INET, SOCKE_STREAM, 0);
+        ```
+
+        
+
+      - `bind()` 函数：专门用于服务器端将 fd 和 网络地址绑定在一起
+
+        ```
+        int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
+        ```
+
+      - `listen` 函数：用于告诉内核这是一个服务器而不是客户端
+
+        ```
+        int listen(int sockfd, int backlog);
+        ```
+
+      - `accept` 函数：用来接收客户端的连接
+
+        ```
+        int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen);
+        ```
+
+        其会返回一个新的 fd 用于同客户端进行交流。
+
+      - `connect` 函数：用于客户端连接服务端
+
+        ```
+        int connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
+        ```
+
+      当客户端发送一个 EOF 信息给服务器端的时候，服务器端才会结束对于客户端连接的处理。因此可以看到服务器端的网络 IO 模型只是单纯的串行模式，无法在较短时间内处理多连接。各种优化可以参见**网络 IO 复用模型**。
+
+   5. 待定
 
 # 并发编程
 
-1. 待定以
-2. 待定二
-3. 待定三
+并发编程的几种形式
+
+- 基于进程(Process-based)：内核自动交错(interleaves)执行多个逻辑流，每个逻辑流有自己的私有地址空间
+- 基于事件(Event-based)：程序员手动交错执行多个逻辑流，所有的流共享相同的地址空间，使用 IO 多路复用来进行交错调度
+- 基于线程(Thread-based)：内核自动交错(interleaves)执行多个逻辑流，每个逻辑流共享相同的地址空间，基于事件和进程的混合
+
+1. 基于进程的并发
+
+   ![image-20221114135501627](./CSapp.assets/image-20221114135501627.png)
+
+   当客户端连接进入的时候，fork 子进程来处理客户端连接，继续进入 accept 流程，可以在处理该客户端连接的同时继续接收其他客户端的连接。每个客户端的请求都由独立的子进程来进行处理。
+
+   但是需要注意：
+
+   1. 主进程必须要监听子进程的状态，收割子进程来防止内存泄漏。
+   2. 由于子进程是 fork 父进程，因此连接描述符也会被复制一遍，因此在子进程中要关闭连接描述符，因为连接描述符只有在引用计数为 0 的情况下才会被关闭。
+
+   特点：
+
+   1. 简单明了而且可以并发解决多连接请求问题
+   2. 进程控制需要额外开销，并且在进程之间共享数据比较难，只有文件表会共享，其他都不会共享
+
+2. 基于事件的并发
+
+   服务器端维护一系列活跃的连接，比如连接描述符数组，然后服务器确定哪些描述符有待处理的输入。使用 `select` 或者 `epoll` 系统调用来确定。由于当有连接进入或者输入信息的时候，描述符的状态会发生变化，`select` 或者 `epoll` 函数会根据这些状态的变化来处理连接描述符，而这些状态的变化就可以看作事件的变化
+
+   ![image-20221114141400204](./CSapp.assets/image-20221114141400204.png)
+
+   很多 web 服务器比如 nodejs、nginx 都是采用这种方式进行处理的。
+
+   特点：
+
+   1. 从始至终只有一个逻辑流和地址空间，方便调试，没有额外的进程和线程开销。
+   2. 比基于进程和线程的方式设计更加复杂。
+   3. 无法利用多核的优势。
+
+3. 基于线程的并发
+
+   ![image-20221114141916103](./CSapp.assets/image-20221114141916103.png)
+
+   ![image-20221114142000853](./CSapp.assets/image-20221114142000853.png)
+
+4. 同步基础
+
+   如何确切知道一个变量到底有没有被共享：
+
+   1. 现存的内存模型是什么？
+   2. 变量实例是如何映射到内存中去的？
+   3. 这些实例中有多少线程对其进行引用？
+
+   🔵线程内存模型
+
+   理论模型：
+
+   - 多线程在进程的上下文中进行运行（代码、数据、堆栈、共享库的虚拟地址空间等）
+   - 每个线程都有独自且分离的线程上下文（线程 ID，栈，PC等）
+
+   实际上：
+
+   - 每个线程寄存器的值确实被分离和保护，但是任何线程都可以访问读写其他线程的堆栈数据
+
+   🔵内存映射
+
+   全局变量：存放在虚拟内存中(堆)且只有一个实例。
+
+   局部变量：存放在线程栈中并且只有一个实例
+
+   局部静态变量：存放在虚拟内存中，且只有一个实例。（相当于仅限当前的函数使用的全局变量）
+
+   🔵信号量机制 semaphore
+
+   semaphore 即非负的全局数字同步变量，通过 P，V 操作来进行管理。
+
+   P：如果信号量非 0 则减一，如果为 0 则阻塞直到非 0.
+
+   V：给信号量 + 1
+
+   C 中的信号量：
+
+   ```
+   #include <semaphore.h>
+   int sem_init(sem_t *s, 0, unsigned int val); /* s = val */
+   int sem_wait(sem_t *s); /* P(s) */
+   int sem_post(sem_t *s); /* V(s) */
+   ```
+
+   信号量机制可以用来处理同步和互斥的情况。
+
+5. 同步进阶
+
+   - 消费者-生产者问题（同步模型）
+
+     ![image-20221119145926672](./CSapp.assets/image-20221119145926672.png)
+
+   - 读者-写者问题（互斥模型）：
+
+     - 可以多个读者一起读
+     - 读写不能同时进行
+
+     不过解决方案有两种方式：
+
+     - 偏向读者的读者-写者模型：读者的优先级较高，写者可能会出现饥饿现象
+
+       ![image-20221119150036244](./CSapp.assets/image-20221119150036244.png)
+
+       - 偏向写者的读者-写者模型：写者的优先级较高，读者可能会出现饥饿现象
+
+     🔵线程池实现
+
+     🔵线程安全
+
+     可能会出现线程不安全的情况：
+
+     1. 不能保护共享变量
+
+     2. 在不同函数调用之间以来其他函数中的持久状态变量
+
+        ![image-20221119150308532](./CSapp.assets/image-20221119150308532.png)
+
+        比如 C 中的 rand 库，其中 next 的值有可能会被其他线程修改。
+
+     3. 函数总返回指向同一个全局变量的指针
+
+6. 待定
 
 # 信息的表示和处理
 
