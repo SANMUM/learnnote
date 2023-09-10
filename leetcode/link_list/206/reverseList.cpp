@@ -27,6 +27,24 @@ public:
     }
 };
 
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode* dummyhead = new ListNode();
+        dummyhead->next = nullptr;
+        ListNode* p =  head;
+        
+        while (p!=nullptr) {
+            ListNode* media = new ListNode(p->val);
+            media->next = dummyhead->next;
+            dummyhead->next = media;
+            p = p->next;
+            
+            // media = dummyhead;
+        }
+        return dummyhead->next;
+    }
+};
 int main() { 
 
 }

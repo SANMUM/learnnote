@@ -56,9 +56,12 @@
 - 189 [轮转数组](./array/189/rotate.cpp)
 - 238 [除自身以外数组的乘积](./array/238/productExceptSelf.cpp)
 - 48 [旋转图像](./array/48/rotate.cpp)
+- 240 [搜索二维矩阵](./array/240/searchMatrix.cpp)
 
 ## 链表
 - 24 [两两交换链表中的节点](./link_list/24/swapPairs.cpp)
+- 141 [环形链表](./link_list/141/hasCycle.cpp)
+- 234 [回文链表](./link_list/234/isPalindrome.cpp)
 - 142 [环形链表](./link_list/142/detectCycle.cpp)
 - 160 [相交链表](./link_list/160/getIntersectionNode.cpp)
 - 203 [移除链表元素](./link_list/203/removeElements.cpp)
