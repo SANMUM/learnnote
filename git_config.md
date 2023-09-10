@@ -119,3 +119,11 @@
 git pull --rebase origin master
 git push origin master
 ```
+
+新的文件上传需要权限认证
+```
+登录github, setting->Developer settings->Personal access tokens->Generate new token(repo);
+将输出的token复制下来 
+git config --system --unset credential.helper
+git remote set-url origin https://<your_token>@github.com/<USERNAME>/<REPO>.git
+```
