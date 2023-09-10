@@ -65,6 +65,8 @@
 - 206 [反转链表](./link_list/206/reverseList.cpp)
 - 707 [设计链表](./link_list/707/MyLinkdList.cpp)
 - 61 [旋转链表](./link_list/61/rotateRight.cpp)
+- 21 [合并两个有序链表](./link_list/21/mergeTwoLists.cpp)
+- 2 [两数相加](./link_list/2/addTwoNumbers.cpp)
 
 ## 哈希表
 - 1 [两数之和](./hash/1/twoSum.cpp)
