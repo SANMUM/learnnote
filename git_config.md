@@ -101,3 +101,21 @@
   `git pull`
 
   重新上传
+  8. 新文件夹下上传
+  ```
+  <!-- 生成 -->
+  git init  
+  git add .
+  git status
+  git commit
+  git remote add origin https://github.com/SANMUM/learnnote.git
+  ```
+报错
+
+![](./git_config.assets/Snipaste_2023-09-10_18-16-47.png)
+
+解决方案
+```
+git pull --rebase origin master
+git push origin master
+```
