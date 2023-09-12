@@ -70,6 +70,9 @@
 - 61 [旋转链表](./link_list/61/rotateRight.cpp)
 - 21 [合并两个有序链表](./link_list/21/mergeTwoLists.cpp)
 - 2 [两数相加](./link_list/2/addTwoNumbers.cpp)
+- 19 [删除链表的倒数第N个节点](./link_list/19/removeNthFromEnd.cpp)
+- 25 [K 个一组翻转链表](./link_list/25/reverseKGroup.cpp)
+- 148 [链表排序](./link_list/148/sortList.cpp)
 
 ## 哈希表
 - 1 [两数之和](./hash/1/twoSum.cpp)

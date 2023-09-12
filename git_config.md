@@ -36,9 +36,9 @@
 
    配置并上传到github
 
-   - 第一步，创建ssh key，找到.ssh目录，看有没有id_rsa和id_rsa.pub这两个文件，如果有的话，直接跳过，脚本执行 ssh-keygen -t rsa -C '邮箱地址'，生成上述公私钥
+   - 第一步，在本地端中，创建ssh key，找到.ssh目录，看有没有id_rsa和id_rsa.pub这两个文件，如果有的话，直接跳过，脚本执行 ssh-keygen -t rsa -C '邮箱地址'，生成上述公私钥
 
-   - 第二步：登录github,打开” settings”中的SSH Keys页面，然后点击“Add SSH Key”,填上任意title，在Key文本框里黏贴id_rsa.pub文件的内容，title中输入名称key输入刚刚生成的已pub后缀的公钥，使用文本打开该文件全部Copy到 key中，点击Add Key
+   - 第二步：登录github,打开” settings”中的SSH Keys页面，然后点击“Add SSH Key”,填上任意title，在Key文本框里黏贴本地端id_rsa.pub文件的内容，点击Add Key
 
 5. **上传代码到git仓库中**
 
@@ -126,4 +126,5 @@ git push origin master
 将输出的token复制下来 
 git config --system --unset credential.helper
 git remote set-url origin https://<your_token>@github.com/<USERNAME>/<REPO>.git
+即可完成
 ```
