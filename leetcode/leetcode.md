@@ -67,6 +67,9 @@
 - 61 [旋转链表](./link_list/61/rotateRight.cpp)
 - 21 [合并两个有序链表](./link_list/21/mergeTwoLists.cpp)
 - 2 [两数相加](./link_list/2/addTwoNumbers.cpp)
+- 148 [排序链表](./link_list/148/sortList.cpp)
+- 23 [合并K个升序链表](./link_list/23/mergeKLists.cpp)
+- 146 [LRU缓存](./link_list/146/LRUCache.cpp)
 
 ## 哈希表
 - 1 [两数之和](./hash/1/twoSum.cpp)
