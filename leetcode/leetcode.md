@@ -56,9 +56,12 @@
 - 189 [轮转数组](./array/189/rotate.cpp)
 - 238 [除自身以外数组的乘积](./array/238/productExceptSelf.cpp)
 - 48 [旋转图像](./array/48/rotate.cpp)
+- 240 [搜索二维矩阵](./array/240/searchMatrix.cpp)
 
 ## 链表
 - 24 [两两交换链表中的节点](./link_list/24/swapPairs.cpp)
+- 141 [环形链表](./link_list/141/hasCycle.cpp)
+- 234 [回文链表](./link_list/234/isPalindrome.cpp)
 - 142 [环形链表](./link_list/142/detectCycle.cpp)
 - 160 [相交链表](./link_list/160/getIntersectionNode.cpp)
 - 203 [移除链表元素](./link_list/203/removeElements.cpp)
@@ -67,9 +70,15 @@
 - 61 [旋转链表](./link_list/61/rotateRight.cpp)
 - 21 [合并两个有序链表](./link_list/21/mergeTwoLists.cpp)
 - 2 [两数相加](./link_list/2/addTwoNumbers.cpp)
+<<<<<<< HEAD
 - 148 [排序链表](./link_list/148/sortList.cpp)
 - 23 [合并K个升序链表](./link_list/23/mergeKLists.cpp)
 - 146 [LRU缓存](./link_list/146/LRUCache.cpp)
+=======
+- 19 [删除链表的倒数第N个节点](./link_list/19/removeNthFromEnd.cpp)
+- 25 [K 个一组翻转链表](./link_list/25/reverseKGroup.cpp)
+- 148 [链表排序](./link_list/148/sortList.cpp)
+>>>>>>> f2a40f70b838fcf3dc590f20b610cd04be778bd8
 
 ## 哈希表
 - 1 [两数之和](./hash/1/twoSum.cpp)
